@@ -39,23 +39,18 @@ public class Communication {
 
     public void saveUser(User user) {
         HttpEntity<User> requestEntity = new HttpEntity<>(user, createHTTPHeader());
-        Long id = user.getId();
-
-        if (id == 0) {
-            ResponseEntity<String> responseEntity = restTemplate.exchange(URL, HttpMethod.POST, requestEntity,
-                    String.class);
-            System.out.println("User was added!");
-            System.out.println(responseEntity.getBody());
-        }
-        else {
-            ResponseEntity<String> responseEntity = restTemplate.exchange(URL, HttpMethod.PUT, requestEntity,
-                    String.class);
-            System.out.println("User was edited!");
-        }
+        ResponseEntity<String> responseEntity = restTemplate.exchange(URL, HttpMethod.POST, requestEntity,
+                String.class);
+        System.out.println("User was added!");
+        System.out.println(responseEntity.getBody());
     }
 
     public void updateUser(User user) {
-
+        HttpEntity<User> requestEntity = new HttpEntity<>(user, createHTTPHeader());
+        ResponseEntity<String> responseEntity = restTemplate.exchange(URL, HttpMethod.PUT, requestEntity,
+                String.class);
+        System.out.println("User was edited!");
+        System.out.println(responseEntity.getBody());
     }
 
     public void deleteUser(Long id) {

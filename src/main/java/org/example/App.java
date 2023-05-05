@@ -15,7 +15,18 @@ public class App
     public static void main( String[] args ) {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
         Communication communication = context.getBean("communication", Communication.class);
+
+        //get
         List<User> userList = communication.getAllUsers();
         System.out.println(userList);
+
+        //post
+        User user = new User("James", "Brown", (byte) 25);
+        communication.saveUser(new User("James", "Brown", (byte) 25));
+
+        //put
+        user.setName("Thomas");
+        user.setLastName("Shelby");
+        communication.updateUser(user);
     }
 }
