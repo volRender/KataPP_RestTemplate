@@ -8,6 +8,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
@@ -41,19 +43,20 @@ public class Communication {
         HttpEntity<User> requestEntity = new HttpEntity<>(user, createHTTPHeader());
         ResponseEntity<String> responseEntity = restTemplate.exchange(URL, HttpMethod.POST, requestEntity,
                 String.class);
-        System.out.println("User was added!");
-        System.out.println(responseEntity.getBody());
+        System.out.print(responseEntity.getBody());
     }
 
     public void updateUser(User user) {
         HttpEntity<User> requestEntity = new HttpEntity<>(user, createHTTPHeader());
         ResponseEntity<String> responseEntity = restTemplate.exchange(URL, HttpMethod.PUT, requestEntity,
                 String.class);
-        System.out.println("User was edited!");
-        System.out.println(responseEntity.getBody());
+        System.out.print(responseEntity.getBody());
     }
 
     public void deleteUser(Long id) {
-
+        HttpEntity<String> requestEntity = new HttpEntity<>("", createHTTPHeader());
+        ResponseEntity<String> responseEntity = restTemplate.exchange(URL + "/" + id, HttpMethod.DELETE,
+                requestEntity, String.class);
+        System.out.print(responseEntity.getBody());
     }
 }

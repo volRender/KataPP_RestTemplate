@@ -21,12 +21,15 @@ public class App
         System.out.println(userList);
 
         //post
-        User user = new User("James", "Brown", (byte) 25);
-        communication.saveUser(new User("James", "Brown", (byte) 25));
+        User user = new User(3L, "James", "Brown", (byte) 25);
+        communication.saveUser(user);
 
         //put
         user.setName("Thomas");
         user.setLastName("Shelby");
         communication.updateUser(user);
+
+        //delete
+        communication.deleteUser(user.getId());
     }
 }
